@@ -24,7 +24,7 @@ svg {
 #graph_container {
     position: relative;
     width: 960px;
-    height: 500px;
+    height: 1000px;
     margin: 0 auto;
     margin-bottom: 40px;
     top: 10px;
@@ -37,10 +37,20 @@ svg {
     position: absolute;
     width: 740px;
     height: 400px;
+    bottom: 50px;
+    left: 110px;
+    background: white;
+    border: 1px dashed;
+}
+
+#stack {
+    position: absolute;
+    width: 740px;
+    height: 400px;
     top: 50px;
     left: 110px;
     background: white;
-    /*border: 1px dashed;*/
+    border: 1px dashed;
 }
 
 .text-button {
