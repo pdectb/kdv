@@ -1,4 +1,19 @@
 
+class Stack
+
+    constructor: ->
+
+        @lineChart = new $blab.LineChart
+            id: "stack"
+            xLabel: "x"
+            yLabel: "u"
+            xLim: [-pi, pi]
+            yLim: [0, 1000]
+            xTicks: 7
+            yTicks: 5
+            click: (x, y) => @initSoliton(x, y)
+            hold: true 
+
 class Movie
 
     # helper functions
@@ -30,14 +45,10 @@ class Movie
             yTicks: 5
             click: (x, y) => @initSoliton(x, y) 
 
-        $("#kdv-stop-button").on "click", => @stopAnimation()
-
-    stopAnimation: () ->
-        clearTimeout @animateId if @animateId
-        @animateId = null
+        $("#kdv-stop-button").on "click", => $blab.stopAnimation()
 
     initSoliton: (xS, yS) ->
-        @stopAnimation()
+        $blab.stopAnimation()
         @count++
         @u0 = zeros(@x) if @count is 1
         @u0 += soliton(yS, xS, @x)
@@ -51,20 +62,15 @@ class Movie
         snapshot = =>
             {u, v} = @etdrk4.computeUV(v)        
             @lineChart.plot(@x, u)
-        @animate snapshot, 1000, 10
-
-    animate: (snapshotFunction, numSnapshots, delay=10) ->
-        @stopAnimation()
-        n = 1
-        frame = ->
-            snapshotFunction()
-            n++
-            @stopAnimation() if n>numSnapshots
-        @animateId = setInterval (-> frame()), delay
+        $blab.animate snapshot, 1000, 10
 
 new Movie
+stack = new Stack
 
-    
+N = 256
+x = 2*pi/N * linspace(-N/2, N/2-1, N)
+stack.lineChart.plot(x, x*100)
+
 # Run: two solitons
 #initSoliton(-1, 800)
 #initSoliton(0, 200)  #;
