@@ -4,7 +4,7 @@ class Movie
     # helper functions
     zeros = (x) -> nm.zeros(1, x.length)[0]  # Zero vector same length as x
     sech = (x) -> 2 / (exp(x) + exp(-x))
-    soliton = (A, x1, x) -> 3*A.pow(2) * (sech(.5*A*(x+x1))).pow(2)
+    soliton = (A, x1, x) -> A*(sech(sqrt(A/12)*(x-x1))).pow(2)
     
     constructor: ->
 
@@ -32,41 +32,35 @@ class Movie
 
         $("#kdv-stop-button").on "click", => @stopAnimation()
 
+    stopAnimation: () ->
+        clearTimeout @animateId if @animateId
+        @animateId = null
+
     initSoliton: (xS, yS) ->
         @stopAnimation()
         @count++
-        console.log "count", @count
         @u0 = zeros(@x) if @count is 1
-        x1 = -xS
-        A = sqrt(yS/3)
-        @u0 += soliton(A, x1, @x)
+        @u0 += soliton(yS, xS, @x)
         @lineChart.plot(@x, @u0)
         if @count is 2
             @count = 0
             @animateSolitons(@u0)
 
-    stopAnimation: () ->
-        clearTimeout @animateId if @animateId
-        @animateId = null
-
-    animate: (snapshotFunction, numSnapshots, delay=10) ->
-        @stopAnimation()
-        n = 1
-        snapshot = ->
-            snapshotFunction()
-            n++
-            @stopAnimation() if n>numSnapshots
-        @animateId = setInterval (-> snapshot()), delay
-
-    animateSolitons: (u) ->
-        # Solve PDE and plot results.
-        # u: initial conditions
-        v = @etdrk4.fft u
+    animateSolitons: (u0) ->
+        v = @etdrk4.fft u0
         snapshot = =>
             {u, v} = @etdrk4.computeUV(v)        
             @lineChart.plot(@x, u)
         @animate snapshot, 1000, 10
 
+    animate: (snapshotFunction, numSnapshots, delay=10) ->
+        @stopAnimation()
+        n = 1
+        frame = ->
+            snapshotFunction()
+            n++
+            @stopAnimation() if n>numSnapshots
+        @animateId = setInterval (-> frame()), delay
 
 new Movie
 
