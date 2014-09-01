@@ -1,7 +1,13 @@
-h2, .notes {
+h2 {
   font-family: 'Noto Serif', serif;
   font-size:    32px;
 }
+
+h3 {
+  font-family: 'Noto Serif', serif;
+  font-size:    24px;
+}
+
                 
 svg { 
   height: 100%;
