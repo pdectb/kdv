@@ -1,8 +1,8 @@
 [
     "/puzlet/js/d3.min.js",
-    "http://localhost:8080/puzlet/line-chart/main.coffee",
-    "http://localhost:8080/puzlet/basic-animation/main.coffee",
-    "http://localhost:8080/pdectb/kdv-etdrk4/step.coffee",
+    "http://puzlet.org/line-chart/main.coffee",
+    "http://puzlet.org/basic-animation/main.coffee",
+    "http://pdectb.github.io/kdv-etdrk4/step.coffee",
     "main.html",
     "main.css",
     "parameters.coffee",
