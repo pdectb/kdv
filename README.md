@@ -1,4 +1,1 @@
-kdv
-===
-
-Korteweg-de Vries equation.
+![](https://github.com/pdectb/kdv/blob/gh-pages/thumb.png)
