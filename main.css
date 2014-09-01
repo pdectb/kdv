@@ -1,20 +1,25 @@
+h2, .notes {
+  font-family: 'Noto Serif', serif;
+  font-size:    32px;
+}
+                
 svg { 
   height: 100%;
   width: 100%;
 }
 
 #text {
-    width: 960px;
+    width: 1200px;
     margin: 0 auto;
 }
 
 #left_col {
    float:left;
-   width:450px;
+   width:600px;
 }
 #right_col {
    float:right;
-   width:450px;
+   width:600px;
 }
 
 #clear {
@@ -23,8 +28,8 @@ svg {
 
 #graph_container {
     position: relative;
-    width: 960px;
-    height: 1000px;
+    width: 550px;
+    height: 1500px;
     margin: 0 auto;
     margin-bottom: 40px;
     top: 10px;
@@ -33,23 +38,70 @@ svg {
     border: 2px solid #ccc;
 }
 
-#solitons {
+#instruct {
     position: absolute;
-    width: 740px;
-    height: 400px;
-    bottom: 50px;
-    left: 110px;
+    /*width: 550px;*/
+    /*height: 200px;*/
+    top: 40px;
+    left: 15px;
     background: white;
     border: 1px dashed;
 }
 
-#stack {
+
+#solitons {
     position: absolute;
-    width: 740px;
+    width: 500px;
     height: 400px;
     top: 50px;
-    left: 110px;
+    left: 50px;
+    background: transparent;
+    border: 1px dashed;
+}
+
+
+#solitons-x-label {
+    position: absolute;
+    top: 380px;
+    left: 245px;
+}
+
+#solitons-y-label {
+    position: absolute;
+    top: 190px;
+    left: -20px;
+}
+
+
+#stack {
+    position: absolute;
+    width: 500px;
+    height: 800px;
+    top: 450px;
+    left: 50px;
     background: white;
+    border: 1px dashed;
+}
+
+#stack-x-label {
+    position: absolute;
+    bottom: 20px;
+    left: 240px;
+}
+
+#stack-y-label {
+    position: absolute;
+    bottom: 440px;
+    left: 20px;
+}
+
+#parameters {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    top: 1300px;
+    left: 95px;
+    background: transparent;
     border: 1px dashed;
 }
 
@@ -59,4 +111,14 @@ svg {
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 10px;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
 }
