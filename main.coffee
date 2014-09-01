@@ -62,7 +62,10 @@ class Movie
     initSoliton: (xS, yS) ->
         @kdv.stopAnimation()
         @count++
-        @u0 = zeros(@x) if @count is 1
+        if @count is 1
+            @u0 = zeros(@x)
+            @stack.clear()
+            @kdv.n = 0
         @u0 += soliton(yS, xS, @x)
         @lineChart.plot(@x, @u0)
         if @count is 2
