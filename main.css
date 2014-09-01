@@ -7,7 +7,6 @@ h3 {
   font-family: 'Noto Serif', serif;
   font-size:    24px;
 }
-
                 
 svg { 
   height: 100%;
@@ -44,16 +43,13 @@ svg {
     border: 2px solid #ccc;
 }
 
-#instruct {
+#instruct1 {
     position: absolute;
-    /*width: 550px;*/
-    /*height: 200px;*/
     top: 40px;
     left: 15px;
     background: white;
-    border: 1px dashed;
+    /*border: 1px dashed;*/
 }
-
 
 #solitons {
     position: absolute;
@@ -62,9 +58,8 @@ svg {
     top: 50px;
     left: 50px;
     background: transparent;
-    border: 1px dashed;
+    /*border: 1px dashed;*/
 }
-
 
 #solitons-x-label {
     position: absolute;
@@ -78,37 +73,38 @@ svg {
     left: -20px;
 }
 
-
 #stack {
     position: absolute;
     width: 500px;
     height: 800px;
-    top: 450px;
-    left: 50px;
+    top: 650px;
+    left: 25px;
     background: white;
-    border: 1px dashed;
+    /*border: 1px dashed;*/
 }
 
 #stack-x-label {
     position: absolute;
-    bottom: 20px;
-    left: 240px;
-}
-
-#stack-y-label {
-    position: absolute;
-    bottom: 440px;
-    left: 20px;
+    bottom: 0px;
+    left: 245px;
 }
 
 #parameters {
     position: absolute;
-    width: 400px;
-    height: 200px;
-    top: 1300px;
-    left: 95px;
+    width: 450px;
+    height: 100px;
+    top: 520px;
+    left: 50px;
     background: transparent;
-    border: 1px dashed;
+    /*border: 1px dashed;*/
+}
+
+#instruct2 {
+    position: absolute;
+    top: -30px;
+    left: 110px;
+    background: white;
+    /*border: 1px dashed;*/
 }
 
 .text-button {
