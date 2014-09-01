@@ -1,19 +1,3 @@
-
-class Stack
-
-    constructor: ->
-
-        @lineChart = new $blab.LineChart
-            id: "stack"
-            xLabel: "x"
-            yLabel: "u"
-            xLim: [-pi, pi]
-            yLim: [0, 1000]
-            xTicks: 7
-            yTicks: 5
-            click: (x, y) => @initSoliton(x, y)
-            hold: true 
-
 class Movie
 
     # helper functions
@@ -23,21 +7,21 @@ class Movie
 
     constructor: ->
 
-        N = 256
+        N = 256 # No. of x-axis grid points.
+        h = 4e-5 # Time step
+        M = 64 # No. of points for ETDRK4 complex means.
+        
         @x = 2*pi/N * linspace(-N/2, N/2-1, N)
         @count = 0
-        @u0 = zeros(@x) #null
-        @u = zeros(@x)
+        @u0 = zeros(@x) # Solution initial condition.
+        @u = zeros(@x) # Solution.
+
+        @etdrk4 = new $blab.Etdrk4 # Imported time-step method.
+            N: N
+            h: h
+            M: M
+            dispersion: (z) -> j*z.pow(3) # KdV uxxx dispersion
                 
-        @kdv = new $blab.BasicAnimation
-        console.log "???", @kdv.n
-
-        @etdrk4 = new $blab.Etdrk4
-            N: 256
-            h: 4e-5
-            M: 64 # no. pts for complex means
-            dispersion: (z) -> j*z.pow(3)
-
         @lineChart = new $blab.LineChart
             id: "solitons"
             xLabel: "x"
@@ -48,7 +32,6 @@ class Movie
             yTicks: 5
             click: (x, y) => @initSoliton(x, y) 
 
-
         @stack = new $blab.LineChart
             id: "stack"
             xLabel: "x"
@@ -57,7 +40,14 @@ class Movie
             yLim: [0, 1000]
             xTicks: 7
             yTicks: 5
-            click: (x, y) => @initSoliton(x, y)
+            click: ->
+
+        @kdv = new $blab.BasicAnimation
+            numSnapshots: 1000
+            delay: 10
+            strobeInterval: 100
+            snapshotFunction: ->
+            strobeFunction: ->
 
         $("#kdv-stop-button").on "click", => @kdv.stopAnimation()
 
@@ -73,17 +63,11 @@ class Movie
 
     animateSolitons: (u0) ->
         v = @etdrk4.fft u0
-
-        @kdv.numSnapshots = 1000
-        @kdv.delay = 10
-        @kdv.strobeInterval = 100
         @kdv.snapshotFunction = =>
             {@u, v} = @etdrk4.computeUV(v)        
             @lineChart.plot(@x, @u)
         @kdv.strobeFunction = =>
-            console.log "strobe!!!"
-            #@stack.plot(@x, @u+@kdv.n*100, color="green", hold=true)
+            @stack.plot(@x, @u+(@kdv.n-1)/2, color="green", hold=true)
         @kdv.animate()
-
 
 new Movie
