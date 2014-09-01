@@ -6,10 +6,14 @@ class Movie
     soliton = (A, x1, x) -> A*(sech(sqrt(A/12)*(x-x1))).pow(2)
 
     constructor: ->
-
-        N = 256 # No. of x-axis grid points.
-        h = 4e-5 # Time step
+        params = $blab.Parameters # import parameters
+        N = params.N # No. of x-axis grid points.
+        h = params.h # Time step
         M = 64 # No. of points for ETDRK4 complex means.
+        @numStrobes = 10 # number of strobes
+        @yMax = 1000 # maximum vertical extent of soliton plot
+        @numSnapshots = 1000 # number of time steps
+        @strobeInterval = Math.floor(@numSnapshots / @numStrobes)
         
         @x = 2*pi/N * linspace(-N/2, N/2-1, N)
         @count = 0
@@ -24,28 +28,32 @@ class Movie
                 
         @lineChart = new $blab.LineChart
             id: "solitons"
-            xLabel: "x"
-            yLabel: "u"
+            xLabel: ""
+            yLabel: ""
             xLim: [-pi, pi]
-            yLim: [0, 1000]
+            yLim: [0, @yMax]
             xTicks: 7
             yTicks: 5
-            click: (x, y) => @initSoliton(x, y) 
+            click: (x, y) => @initSoliton(x, y)
+            x0: 50
+            y0: 50
 
         @stack = new $blab.LineChart
             id: "stack"
-            xLabel: "x"
-            yLabel: "u"
+            xLabel: ""
+            yLabel: ""
             xLim: [-pi, pi]
-            yLim: [0, 1000]
+            yLim: [0, @yMax*@numStrobes]
             xTicks: 7
-            yTicks: 5
+            yTicks: 0
             click: ->
+            x0: 50
+            y0: 50
 
         @kdv = new $blab.BasicAnimation
-            numSnapshots: 1000
+            numSnapshots: @numSnapshots
             delay: 10
-            strobeInterval: 100
+            strobeInterval: @strobeInterval
             snapshotFunction: ->
             strobeFunction: ->
 
@@ -67,7 +75,8 @@ class Movie
             {@u, v} = @etdrk4.computeUV(v)        
             @lineChart.plot(@x, @u)
         @kdv.strobeFunction = =>
-            @stack.plot(@x, @u+(@kdv.n-1)/2, color="green", hold=true)
+            @stack.plot(@x, @u+@kdv.n/@numSnapshots*@yMax*(@numStrobes-1), color="green", hold=true)
         @kdv.animate()
+
 
 new Movie
