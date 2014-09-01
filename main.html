@@ -84,23 +84,33 @@
     nec, volutpat a, suscipit non, turpis. Nullam
     sagittis. Suspendisse pulvinar, augue ac venenatis condimentum,
     sem libero volutpat nibh, nec pellentesque velit pede quis nunc.
+    Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales
+    sagittis magna. Sed consequat, leo eget bibendum sodales, augue
+    velit cursus nunc, blandit vel, luctus pulvinar, hendrerit id,
+    lorem.
 
   </div>
 
   <div id="right_col">
 
     <div id="graph_container">
-      <div id="instruct">Click two coordinates to initialize solitons
+
+      <div id="instruct1">Click two coordinates to initialize solitons
 	and restart simulation.</div>
+
       <div id="solitons">
 	<div id="solitons-x-label">$x$</div>
 	<div id="solitons-y-label">$u$</div>
       </div>
+
+      <div id="parameters" data-file="parameters.coffee">
+	<div id="instruct2">Press ctrl+enter after editing.</div>
+      </div>
+
       <div id="stack">
 	<div id="stack-x-label">$x$</div>
-	<div id="stack-y-label">$u$</div>
       </div>
-      <div id="parameters" data-file="parameters.coffee"></div>
+
     </div>
 
   </div>
@@ -127,12 +137,6 @@
     turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis
     condimentum, sem libero volutpat nibh, nec pellentesque velit pede
     quis nunc.
-
-    <span id="kdv-start-button" class="text-button">click to
-      start</span>
-
-    <span id="kdv-stop-button" class="text-button">click to
-      stop</span>
 
   </div>
 
