@@ -1,18 +1,22 @@
-<h2> KdV equation </h2>
+    <div id="graph_container">
 
-<div style="text-align:left;"><b>Solitons and inverse scattering</b></div>
+      <div id="instruct1">Click two coordinates to initialize solitons
+	and restart simulation.</div>
 
-<div id="text">
+      <div id="solitons">
+	<div id="solitons-x-label">$x$</div>
+	<div id="solitons-y-label">$u$</div>
+      </div>
 
-  <div id="left_col">
+      <div id="parameters" data-file="parameters.coffee">
+	<div id="instruct2">Press ctrl+enter after editing.</div>
+      </div>
 
-    <div id="page1"></div>
+      <div id="stack">
+	<div id="stack-x-label">$x$</div>
+      </div>
 
-  </div>
-
-  <div id="right_col">
-
-    <div id="page2"></div>
+    </div>
 
   </div>
 
@@ -39,8 +43,5 @@
     condimentum, sem libero volutpat nibh, nec pellentesque velit pede
     quis nunc.
 
-  </div>
-
-</div>
 
 
