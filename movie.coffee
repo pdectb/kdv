@@ -5,7 +5,7 @@ class $blab.Movie
     soliton = (A, x1, x) -> A*(sech(sqrt(A/12)*(x-x1))).pow(2)
     zeros = (x) -> nm.zeros(1, x.length)[0]
     
-    constructor: (id, @params) ->
+    constructor: (aniId, stackId, @params) ->
 
         @M = 64 # No. of points for ETDRK4 complex means.
         @numStrobes = 10 # Number of strobes displayed in stack plot.
@@ -16,7 +16,7 @@ class $blab.Movie
         #@params = $blab.Parameters # import parameters
 
         @lineChart = new $blab.LineChart
-            id: id
+            id: aniId
             xLabel: ""
             yLabel: ""
             xLim: [-pi, pi]
@@ -28,7 +28,7 @@ class $blab.Movie
             y0: 50
 
         @stack = new $blab.LineChart
-            id: "stack"
+            id: stackId
             xLabel: ""
             yLabel: ""
             xLim: [-pi, pi]
