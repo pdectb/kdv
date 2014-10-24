@@ -5,18 +5,19 @@ class $blab.Movie
     soliton = (A, x1, x) -> A*(sech(sqrt(A/12)*(x-x1))).pow(2)
     zeros = (x) -> nm.zeros(1, x.length)[0]
     
-    constructor: (aniId, stackId, @params) ->
+    constructor: (@spec) ->
 
+        @spec.dispersion ?= (z) -> j*z.pow(3)        
+        
         @M = 64 # No. of points for ETDRK4 complex means.
         @numStrobes = 10 # Number of strobes displayed in stack plot.
         @yMax = 1000 # Maximum vertical extent of soliton plot.
         @numSnapshots = 1000 # Number of time steps.
         @strobeInterval = Math.floor(@numSnapshots / @numStrobes)
         @count = 0 # Number of solitons placed in plot.
-        #@params = $blab.Parameters # import parameters
 
         @lineChart = new $blab.LineChart
-            id: aniId
+            id: @spec.aniId
             xLabel: ""
             yLabel: ""
             xLim: [-pi, pi]
@@ -26,9 +27,10 @@ class $blab.Movie
             click: (x, y) => @initSoliton(x, y)
             x0: 50
             y0: 50
+            background: "transparent"
 
         @stack = new $blab.LineChart
-            id: stackId
+            id: @spec.stackId
             xLabel: ""
             yLabel: ""
             xLim: [-pi, pi]
@@ -50,9 +52,8 @@ class $blab.Movie
         #$("#kdv-stop-button").on "click", => @kdv.stopAnimation()
 
     initetdrk4: ->
-        #params = $blab.Parameters # import parameters
-        N = @params.N # No. x-axis grid points.
-        h = @params.h # Time step.
+        N = @spec.N # No. x-axis grid points.
+        h = @spec.h # Time step.
         
         @x = 2*pi/N * linspace(-N/2, N/2-1, N)
         @u0 = zeros(@x) # Initial condition.
@@ -62,7 +63,7 @@ class $blab.Movie
             N: N
             h: h
             M: @M
-            dispersion: (z) -> j*z.pow(3) # KdV uxxx dispersion
+            dispersion: @spec.dispersion # (z) -> j*z.pow(3)
         
     initSoliton: (xS, yS) ->
         @kdv.stopAnimation()
