@@ -6,6 +6,7 @@
     "/puzlet/js/d3.min.js",
     "main.html",
     "main.css",
+    "parameters.coffee",
     "movie.coffee", 
     "main.coffee"
 ]
