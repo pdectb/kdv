@@ -7,8 +7,7 @@ class $blab.Movie
     
     constructor: (@spec) ->
 
-        @spec.dispersion ?= (z) -> j*z.pow(3)        
-        
+        @spec.dispersion ?= (z) -> j*z.pow(3) # KdV disperision default
         @M = 64 # No. of points for ETDRK4 complex means.
         @numStrobes = 10 # Number of strobes displayed in stack plot.
         @yMax = 1000 # Maximum vertical extent of soliton plot.
@@ -49,19 +48,15 @@ class $blab.Movie
             snapshotFunction: ->
             strobeFunction: ->
 
-        #$("#kdv-stop-button").on "click", => @kdv.stopAnimation()
-
     initetdrk4: ->
         N = @spec.N # No. x-axis grid points.
-        h = @spec.h # Time step.
-        
         @x = 2*pi/N * linspace(-N/2, N/2-1, N)
         @u0 = zeros(@x) # Initial condition.
         @u = zeros(@x) # Solution.
 
         @etdrk4 = new $blab.Etdrk4 # Imported time-step method.
             N: N
-            h: h
+            h: @spec.h
             M: @M
             dispersion: @spec.dispersion # (z) -> j*z.pow(3)
         
