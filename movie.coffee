@@ -43,7 +43,7 @@ class $blab.Movie
 
         @kdv = new $blab.BasicAnimation
             numSnapshots: @numSnapshots
-            delay: 10
+            delay: 0
             strobeInterval: @strobeInterval
             snapshotFunction: ->
             strobeFunction: ->
