@@ -4,8 +4,11 @@ movie = new $blab.Movie
     N: 256
     h: 4e-5
     dispersion: (z) -> j*z.pow(3)
+<<<<<<< HEAD
 	#- z.pow(2)
 #.
+=======
+>>>>>>> FETCH_HEAD
 
 setTimeout (->
     movie.initSoliton(-1, 800)
